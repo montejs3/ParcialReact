@@ -6,11 +6,11 @@ import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
 
-function Login(props) {
+function Loginp(props){
   const navigate = useNavigate();
+  const[logins, setLogins] = useState(true);
   const [formValues, setFormValues] = useState({email:"", password:"",role:true})
   const [validationStates, setValidationStates] = useState({emailState:true, passwordState:true})
-  const [dataPOST, setDataPOST] = useState("{}")
 
   const handleEmailChange = ((e) => {
     setFormValues({...formValues, email: e.target.value})
@@ -25,8 +25,16 @@ function Login(props) {
   }
   });
 
-  
- 
+  const clickContinuar = (() => {
+
+    if (formValues.email.includes("@")) {
+        setValidationStates({ ...validationStates, emailState: true });
+        setLogins(false);
+        }
+    else if (!formValues.email.includes("@")) {
+        setValidationStates({ ...validationStates, emailState: false });
+        }
+    })
 
   const clickSubmit = (() => {
     //validate email
@@ -41,38 +49,44 @@ function Login(props) {
     }
     })
 
-    const exampleJSON = { email: formValues.email, password: formValues.password, role: formValues.role}
+    const exampleJSON = { email: formValues.email, password: formValues.password}
 
     async function handlePost() {
-      console.log("Recogiendo Data")
-      //console.log("https://my.api.mockaroo.com/login.json?key=7f26da30&__method=POST+"+"&id="+3)
-      
-      const response = await fetch("https://my.api.mockaroo.com/login.json?key=57ab8190&__method=POST", { method: "POST", body: JSON.stringify(exampleJSON), headers: {"X-Requested-With": "XMLHttpRequest"} })
-      const dataa = await response.json()
-      setDataPOST(JSON.stringify(dataa))
-      props.setUsuario(dataa)
-      navigate("/libros" , {state: {value: (dataa)}})
+      console.log("Envio de Post")
+      console.log(JSON.stringify(exampleJSON))
+      //const response = await fetch("https://my.api.mockaroo.com/login.json?key=57ab8190&__method=POST", { method: "POST", body: JSON.stringify(exampleJSON), headers: {"X-Requested-With": "XMLHttpRequest"} })
+      //const dataa = await response.json()
+      //setDataPOST(JSON.stringify(dataa))
+      //props.setUsuario(dataa)
+      navigate("/carros" )
     };
 
-  
-  return (
-    <Container>
+    return(
+        <Container>
     <Row>
-        <Col style={{backgroundColor: 'green'}}>
-            <img src="https://picsum.photos/200/300" alt="random" />
-        </Col>
-
+       
         <Col style={{backgroundColor: 'white'}}>
-            <h1>Tu Libreria ALiada</h1>
+        {(logins ) && 
             <Form>
                 <Form.Group className='mb-6' controlId='formBasicEmail'>
-                    <Form.Label>Email address</Form.Label>
+                    
+                    <h3>Acceder</h3>
+                    <h4>Usa tu cuenta uniandes</h4>
                     <Form.Control type='email' placeholder='Enter email' onChange={handleEmailChange} value={formValues.email} className={!validationStates.emailState ? 'is-invalid' : ''}/>
                     {!validationStates.emailState &&  <Form.Text className='text-muted'>Your email is invalid</Form.Text>}
                     {validationStates.emailState &&  <Form.Text className='text-muted'>We'll never share your email with anyoneelse.</Form.Text>}
+                            
                  </Form.Group>
-                
+                 <Button  onClick={clickContinuar} >
+                        Continuar
+                </Button> 
+            </Form>
+        }
+        {(!logins ) &&      
+            <Form>
+
                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <h3> {formValues.email}</h3>
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={formValues.password} className={!validationStates.passwordState ? 'is-invalid' : ''}/>
                     { !validationStates.passwordState && <Form.Text className="text-muted">Your password should be have numbers and letters and should be at least 6 char long</Form.Text>} 
@@ -83,10 +97,10 @@ function Login(props) {
                 </Button>
 
             </Form>
+        } 
         </Col>
     </Row>
     </Container>
-  );
+    );
 }
-
-export default Login;
+export default Loginp;
