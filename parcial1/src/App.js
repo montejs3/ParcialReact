@@ -7,15 +7,14 @@ import CarroDetail from './components/CarroDetail';
 import { useState } from 'react';
 
 function App() {
-  const [datos, setDatos] = useState();
-  const [usuario, setUsuario] = useState("{}");
+  const [usuario, setUsuario] = useState(0);
   return (
     <div className='App' style={{backgroundColor:'white', width:'100%', height:'100%', minHeight:'100vh', margin:'auto'}}>
       <BrowserRouter>
         <Routes> 
           <Route path="/" element={<Loginp usuario={usuario} setUsuario={setUsuario} />} />
           <Route path="/carros" element={<Carros/>} />
-          <Route path="/carros/:carroId" element={<CarroDetail datos={datos} setDatos={setDatos} usuario={usuario} setUsuario={setUsuario} />} /> 
+          <Route path="/carros/:carroId" element={<CarroDetail usuario={usuario} setUsuario={setUsuario} />} /> 
           <Route path="*" element={<Navigate to="/" />} /> 
         </Routes>
       </BrowserRouter>

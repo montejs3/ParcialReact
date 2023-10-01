@@ -1,16 +1,24 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
 
 function Loginp(props){
   const navigate = useNavigate();
   const[logins, setLogins] = useState(true);
   const [formValues, setFormValues] = useState({email:"", password:"",role:true})
   const [validationStates, setValidationStates] = useState({emailState:true, passwordState:true})
+
+
+  function getRandomBinary() {
+    const randomNum = Math.random();
+    const binaryValue = randomNum < 0.5 ? 0 : 1;
+    return binaryValue;
+  }
 
   const handleEmailChange = ((e) => {
     setFormValues({...formValues, email: e.target.value})
@@ -26,7 +34,6 @@ function Loginp(props){
   });
 
   const clickContinuar = (() => {
-
     if (formValues.email.includes("@")) {
         setValidationStates({ ...validationStates, emailState: true });
         setLogins(false);
@@ -37,11 +44,9 @@ function Loginp(props){
     })
 
   const clickSubmit = (() => {
-    //validate email
     if (formValues.email.includes("@") && validationStates.passwordState) {
       setValidationStates({ ...validationStates, emailState: true });
-      handlePost();
-      
+      handlePost(); 
     } else if (!formValues.email.includes("@")) {
       setValidationStates({ ...validationStates, emailState: false });
     } else if (!validationStates.passwordState) {
@@ -50,7 +55,6 @@ function Loginp(props){
     })
 
     const exampleJSON = { email: formValues.email, password: formValues.password}
-
     async function handlePost() {
       console.log("Envio de Post")
       console.log(JSON.stringify(exampleJSON))
@@ -58,47 +62,66 @@ function Loginp(props){
       //const dataa = await response.json()
       //setDataPOST(JSON.stringify(dataa))
       //props.setUsuario(dataa)
+      const randomRole = getRandomBinary();
+      props.setUsuario(randomRole);
+      alert(JSON.stringify(exampleJSON)+ " Role:" + randomRole)
       navigate("/carros" )
     };
+
+    const intl = useIntl();
+    const placeholderEmail = intl.formatMessage({ id: 'Correo' });
+    const placeholderPassword = intl.formatMessage({ id: 'Contraseña' });
 
     return(
         <Container>
     <Row>
-       
-        <Col style={{backgroundColor: 'white'}}>
         {(logins ) && 
-            <Form>
+            <Form className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px", width: '40%'}}>
                 <Form.Group className='mb-6' controlId='formBasicEmail'>
-                    
-                    <h3>Acceder</h3>
-                    <h4>Usa tu cuenta uniandes</h4>
-                    <Form.Control type='email' placeholder='Enter email' onChange={handleEmailChange} value={formValues.email} className={!validationStates.emailState ? 'is-invalid' : ''}/>
-                    {!validationStates.emailState &&  <Form.Text className='text-muted'>Your email is invalid</Form.Text>}
-                    {validationStates.emailState &&  <Form.Text className='text-muted'>We'll never share your email with anyoneelse.</Form.Text>}
+                    <div className="p-4"> 
+                      <h3><FormattedMessage id='Acceder'/></h3>
+                      <h4><FormattedMessage id='cuenta'/></h4>
+                    </div>
+                    <Form.Control type='email' placeholder={placeholderEmail} onChange={handleEmailChange} value={formValues.email} className={!validationStates.emailState ? 'is-invalid' : ''}/>
+                    {!validationStates.emailState &&  <Form.Text className='text-muted'><FormattedMessage id='emailInvalido'/></Form.Text>}
+                    <br></br>
+                    <h6 className="text-primary m-1" style={{color: 'blue', textAlign: 'left'}}><FormattedMessage id='OlvidasteCorreo'/></h6>
                             
                  </Form.Group>
-                 <Button  onClick={clickContinuar} >
-                        Continuar
-                </Button> 
+                 <Row className="p-4 ">
+                    <Col>
+                      <h6 className="text-primary"><FormattedMessage id='Crear_Cuenta'/></h6>
+                    </Col>
+
+                    <Col>
+                      <Button  onClick={clickContinuar} >
+                        <FormattedMessage id='Siguiente'/>
+                      </Button>
+                    </Col>
+                 </Row>
+                  
             </Form>
         }
         {(!logins ) &&      
-            <Form>
+            <Form  className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px" , width:'40%'}}> 
 
                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <div className="p-3">
                     <h3> {formValues.email}</h3>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange} value={formValues.password} className={!validationStates.passwordState ? 'is-invalid' : ''}/>
-                    { !validationStates.passwordState && <Form.Text className="text-muted">Your password should be have numbers and letters and should be at least 6 char long</Form.Text>} 
+                    <Form.Label><FormattedMessage id='Contra'/></Form.Label>
+                  </div>
+                    <Form.Control type="password" placeholder={placeholderPassword} onChange={handlePasswordChange} value={formValues.password} className={!validationStates.passwordState ? 'is-invalid' : ''}/>
+                    { !validationStates.passwordState && <Form.Text className="text-muted"><FormattedMessage id='ContraseñaInvalida'/></Form.Text>} 
                 </Form.Group>
 
-                <Button variant="primary" onClick={clickSubmit} className="w-25 btn-secondary rounded-pille"  >
-                    Sign In
+                <div className="p-2">
+                <Button  onClick={clickSubmit}   >
+                  <FormattedMessage id='Siguiente'/>
                 </Button>
+                </div>
 
             </Form>
         } 
-        </Col>
     </Row>
     </Container>
     );

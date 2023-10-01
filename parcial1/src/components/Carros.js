@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Carro from "./Carro";
@@ -16,7 +17,7 @@ function Carros(){
 
     return(
         <div className="container">
-           <h2 className="mt-2">Listado de Carros</h2>
+           <h2 className="mt-2"><FormattedMessage id='listadoCarros'/></h2>
             <hr></hr>
             <Row>
                 {carros.map(carro =>(

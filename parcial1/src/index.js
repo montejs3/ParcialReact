@@ -1,15 +1,42 @@
 import React from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { IntlProvider } from "react-intl";
+import localEsMessages from "./locales/es";
+import localEnMessages from "./locales/en";
+import Button from 'react-bootstrap/Button';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App />
-);
+const languages = {
+    en: localEnMessages,
+    es: localEsMessages,
+  };
+
+  const Root = () => {
+    const [currentLocale, setCurrentLocale] = useState("en");
+  
+    const toggleLocale = () => {
+      const newLocale = currentLocale === "en" ? "es" : "en";
+      setCurrentLocale(newLocale);
+    };
+  
+    return (
+      <IntlProvider locale={currentLocale} messages={languages[currentLocale]}>
+        <div>
+          <Button onClick={toggleLocale}>
+            {currentLocale === "en" ? "Spanish" : "English"}
+          </Button>
+          <App />
+        </div>
+      </IntlProvider>
+    );
+  };
+  
+  ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

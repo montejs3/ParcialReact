@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
+import { FormattedMessage, useIntl } from "react-intl";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 
 function CarroDetail(props){
 
     const params = useParams();
-    console.log(params.carroId)
+   
     const [carros, setCarro] = useState([]);
 
     useEffect(() => { 
@@ -17,13 +18,13 @@ function CarroDetail(props){
         }); 
     }, []);
 
-   console.log(carros)
-   console.log(params.mascotaId)
+
    const especial = carros.find((carro) => carro.carModel === (params.carroId)) || {};
 
     return(
         <div>
-        <h1>Detalle de carro</h1>
+        <h1><FormattedMessage id='detalleCarro'/></h1>
+        <h3>Role: {props.usuario}</h3>
         <hr></hr>
         <div className="align-self">
         <Card style={{ width: '45rem', height: '30rem' }} className="mb-3" >
@@ -44,13 +45,33 @@ function CarroDetail(props){
                     <h1>   {especial.carModel}</h1>
                 </Card.Title>
                 <hr></hr>
-                <Card.Text> Card Maker: {especial.carMaker} </Card.Text>
-                <Card.Text> Card Model: {especial.carModel} </Card.Text>
-                <Card.Text> Card Year: {especial.carYear} </Card.Text>
-                <Card.Text> Card Available Online:  {especial.available} </Card.Text>
-                <Card.Text> Card Price: {especial.price} </Card.Text>
-                <Card.Text> Card Description</Card.Text>
+                <Row>
+                    <Col>
+                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Maker:  </Card.Text>
+                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Model:  </Card.Text>
+                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Year: </Card.Text>
+                        <Card.Text style={{color:'red',textAlign:'left'}} > Card Available:   </Card.Text>
+                        <Card.Text style={{color:'red',textAlign:'left'}} > Card Price:  </Card.Text>
+                        <Card.Text style={{color:'red',textAlign:'left'}}>  Description</Card.Text>
+                    </Col>
+                    <Col>
+                        <Card.Text>  {especial.carMaker} </Card.Text>
+                        <Card.Text>  {especial.carModel} </Card.Text>
+                        <Card.Text> {especial.carYear} </Card.Text>
+                        <Card.Text>  {especial.available ? "Yes" : "No"} </Card.Text>
+                        <Card.Text>  {especial.price} </Card.Text>
+                    
+                    
+                    </Col>
+                </Row>
+               
+                <br></br>
+                {(props.usuario ===1 ) && 
                 <p>{especial.description} </p>
+                }
+                {(props.usuario ===0 ) &&
+                <input  placeholder={especial.description} />
+            }
                </Col>
                
                </Row>

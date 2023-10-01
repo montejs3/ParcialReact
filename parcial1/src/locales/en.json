@@ -1,0 +1,16 @@
+{
+    "Acceder": "Log In",
+    "cuenta": "Use your Unialpes account",
+    "OlvidasteCorreo": "Forgot your email?",
+    "Crear_Cuenta":"Create Account",
+    "Siguiente":"Next",
+    "Correo":"Email",
+    "Contraseña":"Enter your password",
+    "info":"We'll never share your email with anyoneelse.",
+    "emailInvalido": "Your email is invalid",
+    "Contra":"Password",
+    "ContraseñaInvalida":"Your password should be at least 6 char long",
+    "listadoCarros": "List of Cars",
+    "detalleCarro": "Car Details"
+
+}

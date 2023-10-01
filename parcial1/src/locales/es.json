@@ -1,0 +1,15 @@
+{
+    "Acceder": "Acceder",
+    "cuenta": "Usa tu cuenta de UniAlpes",
+    "OlvidasteCorreo": "¿Olvidaste tu correo electronico?",
+    "Crear_Cuenta":"Crear Cuenta",
+    "Siguiente":"Siguiente",
+    "Correo":"Correo electronico",
+    "Contraseña":"Ingresa tu contraseña",
+    "info":"No compartiremos tu correo electronico con nadie",
+    "emailInvalido": "Correo electronico invalido",
+    "Contra":"Contraseña",
+    "ContraseñaInvalida":"Contraseña invalida debe tener al menos 6 caracteres",
+    "listadoCarros": "Listado de Carros",
+    "detalleCarro": "Detalle del Carro"
+}
