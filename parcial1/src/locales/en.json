@@ -11,6 +11,13 @@
     "Contra":"Password",
     "ContraseñaInvalida":"Your password should be at least 6 char long",
     "listadoCarros": "List of Cars",
-    "detalleCarro": "Car Details"
+    "detalleCarro": "Car Details",
+    "cardmaker": "Car Maker",
+    "cardmodel": "Car Model",
+    "cardyear": "Car Year",
+    "cardavailable" : "Car Available",
+    "cardprice": "Car Price",
+    "carddescription": " Description"
+
 
 }

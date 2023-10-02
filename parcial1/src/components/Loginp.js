@@ -63,6 +63,7 @@ function Loginp(props){
       //setDataPOST(JSON.stringify(dataa))
       //props.setUsuario(dataa)
       const randomRole = getRandomBinary();
+      console.log(randomRole)
       props.setUsuario(randomRole);
       alert(JSON.stringify(exampleJSON)+ " Role:" + randomRole)
       navigate("/carros" )
@@ -76,7 +77,7 @@ function Loginp(props){
         <Container>
     <Row>
         {(logins ) && 
-            <Form className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px", width: '40%'}}>
+            <Form className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px", width: '45%'}}>
                 <Form.Group className='mb-6' controlId='formBasicEmail'>
                     <div className="p-4"> 
                       <h3><FormattedMessage id='Acceder'/></h3>
@@ -103,14 +104,14 @@ function Loginp(props){
             </Form>
         }
         {(!logins ) &&      
-            <Form  className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px" , width:'40%'}}> 
+            <Form  className="mx-auto" style={{ border: '1px solid ', borderRadius:"10px", width: '45%'}}> 
 
                  <Form.Group className="mb-3" controlId="formBasicPassword">
                   <div className="p-3">
                     <h3> {formValues.email}</h3>
                     <Form.Label><FormattedMessage id='Contra'/></Form.Label>
                   </div>
-                    <Form.Control type="password" placeholder={placeholderPassword} onChange={handlePasswordChange} value={formValues.password} className={!validationStates.passwordState ? 'is-invalid' : ''}/>
+                    <Form.Control  type="password" placeholder={placeholderPassword} onChange={handlePasswordChange} value={formValues.password} className={!validationStates.passwordState ? 'is-invalid' : ''}/>
                     { !validationStates.passwordState && <Form.Text className="text-muted"><FormattedMessage id='ContraseñaInvalida'/></Form.Text>} 
                 </Form.Group>
 

@@ -11,5 +11,11 @@
     "Contra":"Contraseña",
     "ContraseñaInvalida":"Contraseña invalida debe tener al menos 6 caracteres",
     "listadoCarros": "Listado de Carros",
-    "detalleCarro": "Detalle del Carro"
+    "detalleCarro": "Detalle del Carro",
+    "cardmaker": "Fabricante de carro", 
+    "cardmodel": "Modelo de carro", 
+    "cardavailable": "Carro disponible", 
+    "cardyear": "Año del Carro",
+     "cardprice": "Precio del carro", 
+     "carddescription": " Descripción"
 }

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card';
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 
@@ -27,56 +27,85 @@ function CarroDetail(props){
         <h3>Role: {props.usuario}</h3>
         <hr></hr>
         <div className="align-self">
-        <Card style={{ width: '45rem', height: '30rem' }} className="mb-3" >
+            <Row> 
+                
+                <Col xs={6} className="mx-auto"> 
+        <Card className="mb-3 "  >
 
-           <Card.Body>
-            <Row>
-               <Col>
+     
+            <Row >
+               <Col >
                <Card.Img
-                    style={{ height: "14rem" }}
-                    variant="top"
+                    height={'100%'}
                     src={especial.image}
                     alt={especial.description}
                 />
                </Col>
 
-               <Col>
+               <Col >
                 <Card.Title>
-                    <h1>   {especial.carModel}</h1>
+                    <h3>   {especial.carModel}</h3>
                 </Card.Title>
                 <hr></hr>
                 <Row>
                     <Col>
-                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Maker:  </Card.Text>
-                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Model:  </Card.Text>
-                        <Card.Text style={{color:'red',textAlign:'left'}}> Card Year: </Card.Text>
-                        <Card.Text style={{color:'red',textAlign:'left'}} > Card Available:   </Card.Text>
-                        <Card.Text style={{color:'red',textAlign:'left'}} > Card Price:  </Card.Text>
-                        <Card.Text style={{color:'red',textAlign:'left'}}>  Description</Card.Text>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='cardmaker'/>  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='cardmodel'/>  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='cardyear'/>  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='cardavailable'/>  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='cardprice'/>  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{color:'red',textAlign:'left'}}> <FormattedMessage id='carddescription'/>  </Card.Text>
+                    </Row>
                     </Col>
                     <Col>
-                        <Card.Text>  {especial.carMaker} </Card.Text>
-                        <Card.Text>  {especial.carModel} </Card.Text>
-                        <Card.Text> {especial.carYear} </Card.Text>
-                        <Card.Text>  {especial.available ? "Yes" : "No"} </Card.Text>
-                        <Card.Text>  {especial.price} </Card.Text>
+                    <Row className="pb-1">
+                        <Card.Text style={{textAlign:'left'}}>  {especial.carMaker} </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{textAlign:'left'}}>  {especial.carModel} </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{textAlign:'left'}}>  {especial.carYear} </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{textAlign:'left'}}>  {especial.available ? "Yes" : "No"}  </Card.Text>
+                    </Row>
+                    <Row className="pb-1">
+                        <Card.Text style={{textAlign:'left'}}>  {especial.price}  </Card.Text>
+                    </Row>
+                      
+              
+                        {(props.usuario ===1 ) && 
+                <p style={{textAlign:'left'}}>{especial.description} </p>
+                }
+                {(props.usuario ===0 ) &&
+                <input style={{textAlign:'left'}} value={especial.description} />
+            }
                     
                     
                     </Col>
                 </Row>
                
-                <br></br>
-                {(props.usuario ===1 ) && 
-                <p>{especial.description} </p>
-                }
-                {(props.usuario ===0 ) &&
-                <input  placeholder={especial.description} />
-            }
+              
+               
                </Col>
                
                </Row>
-           </Card.Body>
+          
        </Card>
+       </Col>
+       </Row>
        </div>
  
         </div>

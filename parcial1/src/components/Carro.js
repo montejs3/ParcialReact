@@ -1,7 +1,6 @@
 
 import Card from 'react-bootstrap/Card';
 import {Link} from 'react-router-dom';
-import { FormattedMessage, useIntl } from "react-intl";
 
 function Carro(props){
    return(

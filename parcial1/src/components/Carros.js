@@ -1,6 +1,5 @@
-import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Carro from "./Carro";
